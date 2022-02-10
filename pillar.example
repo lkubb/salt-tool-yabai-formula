@@ -1,0 +1,15 @@
+# -*- coding: utf-8 -*-
+# vim: ft=yaml
+---
+tool:
+  users:
+    user:
+      # sync this user's config from a dotfiles repo available as
+      # salt://dotconfig/<user>/yabai or salt://dotconfig/yabai
+      dotconfig: true
+      yabai:
+        # On MacOS >=11 (Big Sur), the scripting addon needs to be
+        # loaded with root privileges. This sets up passwordless sudo
+        # for this user to be able to autoload it in yabairc with
+        # sudo yabai --load-sa
+        pwless_sudo: false
