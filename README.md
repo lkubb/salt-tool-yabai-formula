@@ -21,7 +21,12 @@ The current stable release is for Big Sur, to run Yabai on Monterey, Homebrew ne
 The following shows an example of `tool-yabai` pillar configuration. Namespace it to `tool:users` and/or `tool:yabai:users`.
 ```yaml
 user:
-  dotconfig: true                   # sync this user's config from a dotfiles repo available as salt://dotconfig/<user>/yabai or salt://dotconfig/yabai
+  # sync this user's config from a dotfiles repo available as 
+  # salt://dotconfig/<user>/yabai or salt://dotconfig/yabai
+  dotconfig:              # can be bool or mapping
+    file_mode: '0600'     # default: keep destination or salt umask (new)
+    dir_mode: '0700'      # default: 0700
+    clean: false          # delete files in target. default: false
   yabai:
     # On MacOS >=11 (Big Sur), the scripting addon needs to be
     # loaded with root privileges. This sets up passwordless sudo
