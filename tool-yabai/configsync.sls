@@ -15,7 +15,7 @@ yabai configuration is synced for user '{{ user.name }}':
       - salt://dotconfig/{{ user.name }}/yabai
       - salt://dotconfig/yabai
     - context:
-        user: {{ user }}
+        user: {{ user | json }}
     - template: jinja
     - user: {{ user.name }}
     - group: {{ user.group }}
