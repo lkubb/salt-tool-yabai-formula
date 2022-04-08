@@ -1,18 +1,121 @@
 # -*- coding: utf-8 -*-
 # vim: ft=yaml
+# yamllint disable rule:comments-indentation
 ---
-tool:
+######################################################################
+# Mind that this is to be read as an overview of available
+# settings which can be set in many different ways, not only
+# by providing pillar values.
+# The different sources will be merged. For further information,
+# please see the docs, `libmapstack.jinja` as well as the configured
+# default sources in `parameters/map_jinja.yaml`.
+#
+# This documentation will need to be updated once there is
+# some learned experience. @TODO
+######################################################################
+
+# Apart from the various source files, there are two independent source trees
+# for user-specific configuration.
+# Generally tool_yabai > tool_global.
+# `tool_global` focuses on specific users, of which most values
+# will be respected by all formulae in the `tool` suite:
+tool_global:
   users:
+
+      # The following is global configuration for the user named `user`.
     user:
-      # sync this user's config from a dotfiles repo available as
-      # salt://dotconfig/<user>/yabai or salt://dotconfig/yabai
+
+        # Force the usage of XDG directories for this user.
+      xdg: true
+
+        # Sync this user's config from a dotfiles repo.
+        # The available paths and their priority can be found in the
+        # rendered `config/sync.sls` file (currently, @TODO docs).
+        # Overview in descending priority:
+        # salt://dotconfig/<minion_id>/<user>/yabai
+        # salt://dotconfig/<minion_id>/yabai
+        # salt://dotconfig/<os_family>/<user>/yabai
+        # salt://dotconfig/<os_family>/yabai
+        # salt://dotconfig/default/<user>/yabai
+        # salt://dotconfig/default/yabai
       dotconfig:              # can be bool or mapping
         file_mode: '0600'     # default: keep destination or salt umask (new)
         dir_mode: '0700'      # default: 0700
         clean: false          # delete files in target. default: false
+
+        # Persist environment variables used by this formula for this
+        # user to this file (will be appended to a file relative to $HOME)
+      persistenv: '.config/zsh/zshenv'
+
+        # Add runcom hooks specific to this formula to this file
+        # for this user (will be appended to a file relative to $HOME)
+      rchook: '.config/zsh/zshrc'
+
+        # This user's configuration for this formula. Will be overridden by
+        # user-specific configuration in `tool_yabai:users`.
+        # Set this to `false` to disable configuration for this user.
       yabai:
-        # On MacOS >=11 (Big Sur), the scripting addon needs to be
-        # loaded with root privileges. This sets up passwordless sudo
-        # for this user to be able to autoload it in yabairc with
-        # sudo yabai --load-sa
-        pwless_sudo: false
+          # On MacOS >=11 (Big Sur), the scripting addon needs to be
+          # loaded with root privileges. This sets up passwordless sudo
+          # for this user to be able to autoload it in yabairc with
+          # `sudo yabai --load-sa`.
+        pwless_sudo: true
+
+tool_yabai:
+
+    # Specify an explicit version (works on most Linux distributions) or
+    # keep the packages updated to their latest version on subsequent runs
+    # by leaving version empty or setting it to 'latest'
+    # (again for Linux, brew does that anyways).
+  version: latest
+
+    # Install from HEAD instead of tagged release.
+    # This is needed for MacOS Monterey currently.
+  dev_version: false
+
+    # Default formula configuration for all users.
+  defaults:
+    pwless_sudo: default value for all users
+
+    # User configuration can also be specified here in
+    # `tool_yabai:users`. It will override
+    # configuration sourced from `tool_global:users`.
+  users:
+    user:
+      persistenv: '.bash_profile'
+      yabai:
+        pwless_sudo: this overrides config from tool_globl:users
+
+######################################################################
+# The following settings define default values for this formula,
+# depending on different grains. You should not have to modify them
+# in most cases. For a full overview, see the different files
+# in `parameters`.
+######################################################################
+  lookup:
+    pkg:
+      name: koekeishiya/formulae/yabai
+    rootgroup: root
+    paths:
+      confdir: '.config/yabai'
+      conffile: 'yabairc'
+
+######################################################################
+# This is where `tool` suite settings end and Salt behavior settings
+# inherited from `salt-formulas/template-formula` start. They will
+# influence how exactly the TOFS pattern is applied. Mind that
+# parts of this are disabled for `configsync.sls`.
+######################################################################
+  tofs:
+    # The files_switch key serves as a selector for alternative
+    # directories under the formula files directory. See TOFS pattern
+    # doc for more info.
+    # Note: Any value not evaluated by `config.get` will be used literally.
+    # This can be used to set custom paths, as many levels deep as required.
+    files_switch:
+      - any/path/can/be/used/here
+      - id
+      - roles
+      - osfinger
+      - os
+      - os_family
