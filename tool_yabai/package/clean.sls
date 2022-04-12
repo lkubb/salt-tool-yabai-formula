@@ -9,6 +9,7 @@
 include:
   - {{ sls_config_clean }}
 
+
 Yabai is removed:
   pkg.removed:
     - name: {{ yabai.lookup.pkg.name }}
