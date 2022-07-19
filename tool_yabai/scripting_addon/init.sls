@@ -32,7 +32,7 @@ Allowing non-Apple-signed arm64e binaries:
 # be replaced – the sha256 digest of the yabai binary is embedded
 # into the sudoers file. To avoid embedding a possibly replaced
 # binary's hash, this state only runs on changes in the package
-# state. If brew uhas pgraded the binary otherwise, you will need
+# state. If brew has upgraded the binary otherwise, you will need
 # to ensure that the hash is correct manually.
 # see https://github.com/koekeishiya/yabai/issues/1318
 Passwordless sudo is setup:

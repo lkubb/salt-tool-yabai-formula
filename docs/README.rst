@@ -22,6 +22,21 @@ M1 Macs
 ~~~~~~~
 To be able to load the scripting addon after having disabled SIP, it is mandatory to allow non-Apple-signed arm64e binaries with ``sudo nvram boot-args=-arm64e_preview_abi``. This is automated in this state. You will need to reboot for that setting to apply.
 
+Passwordless sudo
+~~~~~~~~~~~~~~~~~
+To load the scripting addon transparently, it is necessary to allow passwordless sudo for ``yabai --load-sa`` (MacOS >=11). This is provided by an entry in ``sudoers``. Since the ``yabai`` binary is installed by brew, it is owned by the local administrator user account and can be replaced without root privileges. To `prevent a local privilege escalation that can result from that <https://github.com/koekeishiya/yabai/issues/1318>`_, the entry in sudoers is bound to the ``yabai`` binary hash. It is updated automatically only when the formula updates yabai to prevent binding it to some random binary in yabai's stead. If brew does its thing and updates yabai randomly, you will need to update the entry manually. The following script can help you with that:
+
+.. code-block:: bash
+
+  #!/bin/bash
+
+  # calculate new hash for the binary
+  SHA256=$(shasum -a 256 /opt/homebrew/bin/yabai | cut -d' ' -f 1)
+  echo "New yabai hash: $SHA256"
+
+  # replace the hash in-place in the sudoers file
+  sudo sed -i '' -e 's/sha256:[[:alnum:]]*/sha256:'${SHA256}'/' /private/etc/sudoers.d/yabai
+
 Configuration
 -------------
 
