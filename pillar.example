@@ -59,6 +59,13 @@ tool_global:
           # loaded with root privileges. This sets up passwordless sudo
           # for this user to be able to autoload it in yabairc with
           # `sudo yabai --load-sa`.
+          # To prevent local privilege escalation, the sha256 hexdigest
+          # is embedded into the sudoers file. It is updated only when
+          # he package state reports changes in order to avoid embedding
+          # a replacing binary's hash automatically. That also means if
+          # brew upgraded yabai otherwise, you will need to ensure the
+          # correct hash is embedded manually.
+          # See https://github.com/koekeishiya/yabai/issues/1318
         pwless_sudo: true
 
 tool_yabai:
