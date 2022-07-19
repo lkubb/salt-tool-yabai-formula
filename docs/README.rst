@@ -22,10 +22,6 @@ M1 Macs
 ~~~~~~~
 To be able to load the scripting addon after having disabled SIP, it is mandatory to allow non-Apple-signed arm64e binaries with ``sudo nvram boot-args=-arm64e_preview_abi``. This is automated in this state. You will need to reboot for that setting to apply.
 
-macOS Monterey
-~~~~~~~~~~~~~~
-The current stable release is for Big Sur, to run Yabai on Monterey, Homebrew needs to compile the latest development edition from HEAD.
-
 Configuration
 -------------
 

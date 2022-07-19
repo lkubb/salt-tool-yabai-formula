@@ -77,7 +77,6 @@ tool_yabai:
   version: latest
 
     # Install from HEAD instead of tagged release.
-    # This is needed for MacOS Monterey currently.
   dev_version: false
 
     # Default formula configuration for all users.

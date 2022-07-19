@@ -9,7 +9,7 @@
 Yabai is installed:
   pkg.installed:
     - name: {{ yabai.lookup.pkg.name }}
-{%- if 12 <= grains['osmajorrelease'] | int or yabai.dev_version %}
+{%- if yabai.get("dev_version") %}
     - options: '--HEAD'
 {%- endif %}
 

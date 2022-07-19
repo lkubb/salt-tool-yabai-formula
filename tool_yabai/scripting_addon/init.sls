@@ -44,6 +44,7 @@ Passwordless sudo is setup:
               }}
     - user: root
     - group: wheel
+    - template: jinja
     - onchanges:
       - Yabai is installed
     - context:
