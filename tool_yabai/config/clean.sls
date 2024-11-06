@@ -1,8 +1,12 @@
-# -*- coding: utf-8 -*-
 # vim: ft=sls
 
-{%- set tplroot = tpldir.split('/')[0] %}
-{%- set sls_service_clean = tplroot ~ '.service.clean' %}
+{#-
+    Removes the configuration of the Yabai service and has a
+    dependency on `tool_yabai.service.clean`_.
+#}
+
+{%- set tplroot = tpldir.split("/")[0] %}
+{%- set sls_service_clean = tplroot ~ ".service.clean" %}
 {%- from tplroot ~ "/map.jinja" import mapdata as yabai with context %}
 
 include:
@@ -13,5 +17,5 @@ include:
 
 Yabai config dir is absent for user '{{ user.name }}':
   file.absent:
-    - name: {{ user['_yabai'].confdir }}
+    - name: {{ user["_yabai"].confdir }}
 {%- endfor %}

@@ -1,7 +1,6 @@
-# -*- coding: utf-8 -*-
 # vim: ft=sls
 
-{%- set tplroot = tpldir.split('/')[0] %}
+{%- set tplroot = tpldir.split("/")[0] %}
 {%- from tplroot ~ "/map.jinja" import mapdata as yabai with context %}
 
 
@@ -16,8 +15,8 @@ Not allowing non-Apple-signed arm64e binaries:
       - nvram boot-args | grep '\-arm64e_preview_abi'
 {%-   endif %}
 
-{%-   if yabai.users | selectattr('yabai.pwless_sudo', 'defined') |
-      selectattr('yabai.pwless_sudo') | list %}
+{%-   if yabai.users | selectattr("yabai.pwless_sudo", "defined") |
+      selectattr("yabai.pwless_sudo") | list %}
 
 Passwordless sudo is not setup:
   file.absent:

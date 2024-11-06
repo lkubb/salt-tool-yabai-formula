@@ -1,8 +1,7 @@
-# -*- coding: utf-8 -*-
 # vim: ft=sls
 
-{%- set tplroot = tpldir.split('/')[0] %}
-{%- set sls_package_install = tplroot ~ '.package.install' %}
+{%- set tplroot = tpldir.split("/")[0] %}
+{%- set sls_package_install = tplroot ~ ".package.install" %}
 {%- from tplroot ~ "/map.jinja" import mapdata as yabai with context %}
 {%- from tplroot ~ "/libtofs.jinja" import files_switch %}
 
@@ -22,8 +21,8 @@ Allowing non-Apple-signed arm64e binaries:
       - sls: {{ sls_package_install }}
 {%-   endif %}
 
-{%-   if yabai.users | selectattr('yabai.pwless_sudo', 'defined') |
-      selectattr('yabai.pwless_sudo') | list %}
+{%-   if yabai.users | selectattr("yabai.pwless_sudo", "defined") |
+      selectattr("yabai.pwless_sudo") | list %}
 
 # This makes sure that the scripting addon can be loaded without
 # `sudo`. To prevent a local privilege escalation – the yabai binary
@@ -37,8 +36,8 @@ Allowing non-Apple-signed arm64e binaries:
 Passwordless sudo is setup:
   file.managed:
     - name: /private/etc/sudoers.d/yabai
-    - source: {{ files_switch(['sudoers', 'sudoers.j2'],
-                              lookup='Passwordless sudo is setup'
+    - source: {{ files_switch(["sudoers", "sudoers.j2"],
+                              lookup="Passwordless sudo is setup"
                  )
               }}
     - user: root
