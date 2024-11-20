@@ -25,7 +25,9 @@ service_name: Yabai
 settings:
   dev_version: false
 user_settings:
+  autostart: true
   pwless_sudo: true
+  service_pathenv: null
 xdg_conffile: yabairc
 xdg_dirname: yabai
 initialized: true

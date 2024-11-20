@@ -21,8 +21,7 @@ Allowing non-Apple-signed arm64e binaries:
       - sls: {{ sls_package_install }}
 {%-   endif %}
 
-{%-   if yabai.users | selectattr("yabai.pwless_sudo", "defined") |
-      selectattr("yabai.pwless_sudo") | list %}
+{%-   if yabai.users | selectattr("yabai.pwless_sudo", "true") | list %}
 
 # This makes sure that the scripting addon can be loaded without
 # `sudo`. To prevent a local privilege escalation – the yabai binary

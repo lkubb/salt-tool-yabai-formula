@@ -15,8 +15,7 @@ Not allowing non-Apple-signed arm64e binaries:
       - nvram boot-args | grep '\-arm64e_preview_abi'
 {%-   endif %}
 
-{%-   if yabai.users | selectattr("yabai.pwless_sudo", "defined") |
-      selectattr("yabai.pwless_sudo") | list %}
+{%-   if yabai.users | selectattr("yabai.pwless_sudo", "true") | list %}
 
 Passwordless sudo is not setup:
   file.absent:

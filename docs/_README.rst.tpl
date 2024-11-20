@@ -85,11 +85,17 @@ The following shows an example of ``tool_yabai`` per-user configuration. If prov
       # user-specific configuration in `tool_yabai:users`.
       # Set this to `false` to disable configuration for this user.
     yabai:
+        # Whether the Yabai service should be installed and enabled
+        # for this user. Defaults to true.
+      autostart: true
         # On MacOS >=11 (Big Sur), the scripting addon needs to be
         # loaded with root privileges. This sets up passwordless sudo
         # for this user to be able to autoload it in yabairc with
         # `sudo yabai --load-sa`.
       pwless_sudo: true
+        # $PATH set in the user's service file.
+        # Defaults to the user's $PATH.
+      service_pathenv: null
 
 Formula-specific
 ^^^^^^^^^^^^^^^^

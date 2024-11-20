@@ -3,4 +3,4 @@
   selectattr("yabai.pwless_sudo") |
   map(attribute="name"))
 }} ALL = (root) NOPASSWD: sha256:
-{{- salt["cmd.run_stdout"]("shasum -a 256 $(which yabai) | awk '{ print $1 }'", python_shell=true) }} {{ yabai.lookup.brew_prefix }}/bin/yabai --load-sa
+{{- salt["cmd.run_stdout"]("shasum -a 256 \"$(which yabai)\" | awk '{ print $1 }'", python_shell=true) }} {{ yabai.lookup.bin }} --load-sa
