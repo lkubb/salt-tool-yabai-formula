@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "salt_tool_yabai"
+name = "tool_yabai_formula"
 version = "1.0.0"
 description = "Saltstack states to manage Yabai"
 authors = ["lkubb"]

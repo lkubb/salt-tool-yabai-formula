@@ -1,5 +1,5 @@
-Welcome to salt-tool-yabai-formula's documentation!
-===================================================
+Welcome to tool-yabai-formula's documentation!
+==============================================
 
 .. toctree::
    :maxdepth: 2

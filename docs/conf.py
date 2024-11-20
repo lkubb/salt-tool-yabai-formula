@@ -22,7 +22,7 @@ sys.path.insert(0, os.path.abspath('..'))
 
 # -- Project information -----------------------------------------------------
 
-project = 'salt-tool-yabai-formula'
+project = 'tool-yabai-formula'
 copyright = '2022, lkubb'
 author = 'lkubb'
 

@@ -8,7 +8,7 @@
 
 {%- set tplroot = tpldir.split("/")[0] %}
 {%- from tplroot ~ "/map.jinja" import mapdata as yabai with context %}
-{%- from tplroot ~ "/libtofs.jinja" import files_switch %}
+{%- from tplroot ~ "/libtofsstack.jinja" import files_switch %}
 
 
 Yabai is restarted:
@@ -23,10 +23,14 @@ Yabai configuration is synced for user '{{ user.name }}':
   file.recurse:
     - name: {{ user["_yabai"].confdir }}
     - source: {{ files_switch(
-                ["yabai"],
-                default_files_switch=["id", "os_family"],
-                override_root="dotconfig",
-                opt_prefixes=[user.name]) }}
+                    ["yabai"],
+                    lookup="Yabai configuration is synced for user '{}'".format(user.name),
+                    config=yabai,
+                    path_prefix="dotconfig",
+                    files_dir="",
+                    custom_data={"users": [user.name]},
+                 )
+              }}
     - context:
         user: {{ user | json }}
     - template: jinja

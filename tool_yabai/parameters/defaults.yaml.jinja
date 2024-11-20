@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # vim: ft=yaml
 #
 # Set default values.
@@ -21,7 +20,4 @@ values:
       python_shell=True) }}'
     m1: {{ 'Apple' in grains['cpu_model'] }}
     sip: {{ not salt['cmd.retcode']('csrutil status | grep "System Integrity Protection status" | grep "enabled"', python_shell=True, ignore_retcode=True) }}
-  # Just here for testing
-  added_in_defaults: defaults_value
-  winner: defaults
 ...
