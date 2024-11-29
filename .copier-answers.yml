@@ -36,6 +36,7 @@ service_abbr: yabai
 service_name: Yabai
 settings:
   dev_version: false
+  extra_pkgs: []
   sketchybar:
     install: false
 user_settings:

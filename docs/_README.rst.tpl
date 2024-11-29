@@ -118,6 +118,9 @@ Formula-specific
       # Install from HEAD instead of tagged release.
       # This is needed for MacOS Monterey currently.
     dev_version: false
+      # A list of extra packages to install, usually required by
+      # your config for a status bar like sketchybar.
+    extra_pkgs: []
       # https://github.com/FelixKratz/SketchyBar
     sketchybar:
         # Install sketchybar

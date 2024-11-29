@@ -11,6 +11,13 @@ Yabai is installed:
     - options: '--HEAD'
 {%- endif %}
 
+{%- if yabai.extra_pkgs %}
+
+Misc packages are installed for Yabai:
+  pkg.installed:
+    - pkgs: {{ yabai.extra_pkgs | json }}
+{%- endif %}
+
 Yabai setup is completed:
   test.nop:
     - name: Hooray, Yabai setup has finished.

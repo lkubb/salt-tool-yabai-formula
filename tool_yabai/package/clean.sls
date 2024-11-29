@@ -13,6 +13,13 @@ include:
   - {{ sls_config_clean }}
 
 
+{%- if yabai.extra_pkgs %}
+
+Misc packages are removed for Yabai:
+  pkg.removed:
+    - pkgs: {{ yabai.extra_pkgs | json }}
+{%- endif %}
+
 Yabai is removed:
   pkg.removed:
     - name: {{ yabai.lookup.pkg.name }}
