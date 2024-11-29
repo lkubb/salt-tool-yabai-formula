@@ -14,7 +14,19 @@ has_config_template: false
 has_configsync: true
 has_service: true
 has_xdg: true
-lookup: {}
+lookup:
+  sketchybar:
+    config:
+      dir: .config/sketchybar
+      file: sketchybarrc
+    pkg:
+      name: FelixKratz/formulae/sketchybar
+    sbarlua:
+      repo: https://github.com/FelixKratz/SbarLua
+      src: .cache/sketchybar_lua_build
+      target: .local/share/sketchybar_lua
+    service:
+      name: com.felixkratz.sketchybar
 mac_cask: false
 mac_library: false
 needs_repo: false
@@ -24,10 +36,14 @@ service_abbr: yabai
 service_name: Yabai
 settings:
   dev_version: false
+  sketchybar:
+    install: false
 user_settings:
   autostart: true
   pwless_sudo: true
   service_pathenv: null
+  sketchybar:
+    lua_mod: false
 xdg_conffile: yabairc
 xdg_dirname: yabai
 initialized: true

@@ -1,9 +1,9 @@
 # vim: ft=sls
 
 {#-
-    Syncs the Yabai service configuration
+    Syncs the Sketchybar service configuration
     with a dotfiles repo.
-    Has a dependency on `tool_yabai.package`_.
+    Has a dependency on `tool_yabai.sketchybar.package`_.
 #}
 
 {%- set tplroot = tpldir.split("/")[0] %}
@@ -17,13 +17,14 @@ include:
 
 {%- for user in yabai.users | selectattr("dotconfig", "defined") | selectattr("dotconfig") %}
 {%-   set dotconfig = user.dotconfig if user.dotconfig is mapping else {} %}
+{%-   set confdir = user.home | path_join(yabai.lookup.sketchybar.config.dir) %}
 
-Yabai configuration is synced for user '{{ user.name }}':
+Sketchybar configuration is synced for user '{{ user.name }}':
   file.recurse:
-    - name: {{ user["_yabai"].confdir }}
+    - name: {{ confdir }}
     - source: {{ files_switch(
-                    ["yabai"],
-                    lookup="Yabai configuration is synced for user '{}'".format(user.name),
+                    ["sketchybar"],
+                    lookup="Sketchybar configuration is synced for user '{}'".format(user.name),
                     config=yabai,
                     path_prefix="dotconfig",
                     files_dir="",

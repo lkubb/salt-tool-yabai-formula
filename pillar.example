@@ -72,6 +72,11 @@ tool_global:
           # $PATH set in the user's service file.
           # Defaults to the user's $PATH.
         service_pathenv: null
+          # https://github.com/FelixKratz/SketchyBar
+        sketchybar:
+            # Install sbarlua
+            # https://github.com/FelixKratz/SbarLua
+          lua_mod: false
 
 tool_yabai:
 
@@ -83,6 +88,10 @@ tool_yabai:
 
     # Install from HEAD instead of tagged release.
   dev_version: false
+    # https://github.com/FelixKratz/SketchyBar
+  sketchybar:
+      # Install sketchybar
+    install: false
 
     # Default formula configuration for all users.
   defaults:
@@ -112,6 +121,18 @@ tool_yabai:
       conffile: 'yabairc'
       xdg_dirname: 'yabai'
       xdg_conffile: 'yabairc'
+    sketchybar:
+      config:
+        dir: .config/sketchybar
+        file: sketchybarrc
+      pkg:
+        name: FelixKratz/formulae/sketchybar
+      sbarlua:
+        repo: https://github.com/FelixKratz/SbarLua
+        src: .cache/sketchybar_lua_build
+        target: .local/share/sketchybar_lua
+      service:
+        name: com.felixkratz.sketchybar
 
 ######################################################################
 # The following settings influence which source paths are considered

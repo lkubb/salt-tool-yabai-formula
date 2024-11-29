@@ -1,13 +1,11 @@
 # vim: ft=sls
 
 {%- set tplroot = tpldir.split("/")[0] %}
-{%- set sls_package_install = tplroot ~ ".package.install" %}
 {%- set sls_config_sync = tplroot ~ ".sketchybar.config.sync" %}
 {%- from tplroot ~ "/map.jinja" import mapdata as yabai with context %}
 {%- from tplroot ~ "/libtofsstack.jinja" import files_switch %}
 
 include:
-  - {{ sls_package_install }}
   - {{ sls_config_sync }}
 
 
@@ -15,26 +13,26 @@ include:
 
 {%-   if user.name == yabai.lookup.console_user %}
 
-Yabai service is not running:
+Sketchybar service is not running:
   service.dead:
-    - name: {{ yabai.lookup.service.name }}
+    - name: {{ yabai.lookup.sketchybar.service.name }}
     - require_in:
-      - Yabai service is ignored for user '{{ user.name }}'
+      - Sketchybar service is ignored for user '{{ user.name }}'
 {%-   endif %}
 
-Yabai service is ignored for user '{{ user.name }}':
+Sketchybar service is ignored for user '{{ user.name }}':
   file.absent:
-    - name: {{ user.home | path_join("Library", "LaunchAgents", yabai.lookup.service.name ~ ".plist") }}
+    - name: {{ user.home | path_join("Library", "LaunchAgents", yabai.lookup.sketchybar.service.name ~ ".plist") }}
 {%- endfor %}
 
 {%- for user in yabai.users | rejectattr("yabai.autostart", "false") %}
 
-Yabai service is loaded during login for user '{{ user.name }}':
+Sketchybar service is loaded during login for user '{{ user.name }}':
   file.managed:
-    - name: {{ user.home | path_join("Library", "LaunchAgents", yabai.lookup.service.name ~ ".plist") }}
+    - name: {{ user.home | path_join("Library", "LaunchAgents", yabai.lookup.sketchybar.service.name ~ ".plist") }}
     - source: {{ files_switch(
-                    ["com.koekeishiya.yabai.plist", "com.koekeishiya.yabai.plist.j2"],
-                    lookup="Yabai service is loaded during login for user '{}'".format(user.name),
+                    ["com.felixkratz.sketchybar.plist", "com.felixkratz.sketchybar.plist.j2"],
+                    lookup="Sketchybar service is loaded during login for user '{}'".format(user.name),
                     config=yabai,
                     custom_data={"users": [user.name]},
                  )
@@ -45,9 +43,9 @@ Yabai service is loaded during login for user '{{ user.name }}':
     - mode: '0644'
     - makedirs: true
     - require:
-      - Yabai is installed
+      - Sketchybar is installed
 {%-   if user.dotconfig %}
-      - Yabai configuration is synced for user '{{ user.name }}'
+      - Sketchybar configuration is synced for user '{{ user.name }}'
 {%-   endif %}
     - context:
         yabai: {{ yabai | json }}
@@ -55,14 +53,14 @@ Yabai service is loaded during login for user '{{ user.name }}':
 
 {%-   if user.name == yabai.lookup.console_user %}
 
-Yabai service is running:
+Sketchybar service is running:
   service.running:
-    - name: {{ yabai.lookup.service.name }}
+    - name: {{ yabai.lookup.sketchybar.service.name }}
     - enable: true
     - watch:
-      - Yabai service is loaded during login for user '{{ user.name }}'
+      - Sketchybar service is loaded during login for user '{{ user.name }}'
 {%-     if user.dotconfig %}
-      - Yabai configuration is synced for user '{{ user.name }}'
+      - Sketchybar configuration is synced for user '{{ user.name }}'
 {%-     endif %}
 {%-   endif %}
 {%- endfor %}

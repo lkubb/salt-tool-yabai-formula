@@ -19,7 +19,22 @@ values:
     console_user: '{{ salt["cmd.run_stdout"]('id -n -u $(stat -f "%u" /dev/console)', python_shell=True) }}'
     m1: {{ "Apple" in grains.cpu_model }}
     sip: {{ not salt["cmd.retcode"]("csrutil status | grep 'System Integrity Protection status' | grep enabled", python_shell=true, ignore_retcode=true) }}
-
+    sketchybar:
+      bin: '{{ salt["cmd.run_stdout"]("brew --prefix") | path_join("bin", "sketchybar") }}'
+      config:
+        dir: .config/sketchybar
+        file: sketchybarrc
+      pkg:
+        name: FelixKratz/formulae/sketchybar
+      sbarlua:
+        repo: https://github.com/FelixKratz/SbarLua
+        src: .cache/sketchybar_lua_build
+        target: .local/share/sketchybar_lua
+      service:
+        name: com.felixkratz.sketchybar
+  dev_version: false
+  sketchybar:
+    install: false
   tofs:
     files_switch:
       - G@id|U@users

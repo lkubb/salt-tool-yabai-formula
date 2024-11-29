@@ -96,6 +96,11 @@ The following shows an example of ``tool_yabai`` per-user configuration. If prov
         # $PATH set in the user's service file.
         # Defaults to the user's $PATH.
       service_pathenv: null
+        # https://github.com/FelixKratz/SketchyBar
+      sketchybar:
+          # Install sbarlua
+          # https://github.com/FelixKratz/SbarLua
+        lua_mod: false
 
 Formula-specific
 ^^^^^^^^^^^^^^^^
@@ -113,6 +118,10 @@ Formula-specific
       # Install from HEAD instead of tagged release.
       # This is needed for MacOS Monterey currently.
     dev_version: false
+      # https://github.com/FelixKratz/SketchyBar
+    sketchybar:
+        # Install sketchybar
+      install: false
 
       # Default formula configuration for all users.
     defaults:
