@@ -57,10 +57,9 @@ Yabai service is running:
   service.running:
     - name: {{ yabai.lookup.service.name }}
     - enable: true
-    - require:
+    - watch:
       - Yabai service is loaded during login for user '{{ user.name }}'
 {%-     if user.dotconfig %}
-    - watch:
       - Yabai configuration is synced for user '{{ user.name }}'
 {%-     endif %}
 {%-   endif %}
