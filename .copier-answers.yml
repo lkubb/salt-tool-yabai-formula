@@ -16,6 +16,9 @@ has_service: true
 has_xdg: true
 lookup:
   sketchybar:
+    app_font:
+      source: https://github.com/kvndrsslr/sketchybar-app-font/releases/download/latest/sketchybar-app-font.ttf
+      target: Library/Fonts/sketchybar-app-font.ttf
     config:
       dir: .config/sketchybar
       file: sketchybarrc
@@ -44,6 +47,7 @@ user_settings:
   pwless_sudo: true
   service_pathenv: null
   sketchybar:
+    app_font: false
     lua_mod: false
 xdg_conffile: yabairc
 xdg_dirname: yabai

@@ -98,6 +98,9 @@ The following shows an example of ``tool_yabai`` per-user configuration. If prov
       service_pathenv: null
         # https://github.com/FelixKratz/SketchyBar
       sketchybar:
+          # Install sketchybar app font
+          # https://github.com/kvndrsslr/sketchybar-app-font/
+        app_font: false
           # Install sbarlua
           # https://github.com/FelixKratz/SbarLua
         lua_mod: false

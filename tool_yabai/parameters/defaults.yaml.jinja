@@ -20,6 +20,9 @@ values:
     m1: {{ "Apple" in grains.cpu_model }}
     sip: {{ not salt["cmd.retcode"]("csrutil status | grep 'System Integrity Protection status' | grep enabled", python_shell=true, ignore_retcode=true) }}
     sketchybar:
+      app_font:
+        source: https://github.com/kvndrsslr/sketchybar-app-font/releases/download/latest/sketchybar-app-font.ttf  # yamllint disable-line rule:line-length
+        target: Library/Fonts/sketchybar-app-font.ttf
       bin: '{{ salt["cmd.run_stdout"]("brew --prefix") | path_join("bin", "sketchybar") }}'
       config:
         dir: .config/sketchybar

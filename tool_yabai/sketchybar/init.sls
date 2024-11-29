@@ -8,6 +8,7 @@
 
 include:
   - .package
+  - .app_font
   - .sbarlua
   - .config
   - .service

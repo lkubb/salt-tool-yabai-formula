@@ -74,6 +74,9 @@ tool_global:
         service_pathenv: null
           # https://github.com/FelixKratz/SketchyBar
         sketchybar:
+            # Install sketchybar app font
+            # https://github.com/kvndrsslr/sketchybar-app-font/
+          app_font: false
             # Install sbarlua
             # https://github.com/FelixKratz/SbarLua
           lua_mod: false
@@ -125,6 +128,9 @@ tool_yabai:
       xdg_dirname: 'yabai'
       xdg_conffile: 'yabairc'
     sketchybar:
+      app_font:
+        source: https://github.com/kvndrsslr/sketchybar-app-font/releases/download/latest/sketchybar-app-font.ttf  # yamllint disable-line rule:line-length
+        target: Library/Fonts/sketchybar-app-font.ttf
       config:
         dir: .config/sketchybar
         file: sketchybarrc

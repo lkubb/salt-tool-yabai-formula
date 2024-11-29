@@ -98,6 +98,9 @@ The following shows an example of ``tool_yabai`` per-user configuration. If prov
       service_pathenv: null
         # https://github.com/FelixKratz/SketchyBar
       sketchybar:
+          # Install sketchybar app font
+          # https://github.com/kvndrsslr/sketchybar-app-font/
+        app_font: false
           # Install sbarlua
           # https://github.com/FelixKratz/SbarLua
         lua_mod: false
@@ -118,6 +121,9 @@ Formula-specific
       # Install from HEAD instead of tagged release.
       # This is needed for MacOS Monterey currently.
     dev_version: false
+      # A list of extra packages to install, usually required by
+      # your config for a status bar like sketchybar.
+    extra_pkgs: []
       # https://github.com/FelixKratz/SketchyBar
     sketchybar:
         # Install sketchybar

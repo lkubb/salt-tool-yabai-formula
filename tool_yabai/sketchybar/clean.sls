@@ -9,6 +9,7 @@
 
 include:
   - .service.clean
-  - .sbarlua.clean
   - .config.clean
+  - .sbarlua.clean
+  - .app_font.clean
   - .package.clean
