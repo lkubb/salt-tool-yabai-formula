@@ -21,6 +21,35 @@ Allowing non-Apple-signed arm64e binaries:
       - sls: {{ sls_package_install }}
 {%-   endif %}
 
+{%-   if grains.osmajorrelease <= 15 %}
+
+# At least on Sequoia and Yabai v7.1.16+, the SA fails to load if unpatched.
+# https://github.com/asmvik/yabai/issues/2686#issuecomment-3678216885
+Scripting addon PAC ABI version is patched:
+  cmd.run:
+    - name: |
+        LOADER="/Library/ScriptingAdditions/yabai.osax/Contents/MacOS/loader"
+        # Get index (I) and offset (O) for caps 0x81
+        read I O <<< $(otool -f "$LOADER" | awk '/architecture/{i=$2} /capabilities 0x81/{f=1} f&&/offset/{print i, $2; exit}')
+
+        if [ -n "$O" ]; then
+            # Patch Fat (offset+4) and Mach-O (slice+11) -> 0x80
+            printf '\x80' | dd of="$LOADER" bs=1 seek=$((8 + I*20 + 4)) count=1 conv=notrunc 2>/dev/null
+            printf '\x80' | dd of="$LOADER" bs=1 seek=$((O + 11)) count=1 conv=notrunc 2>/dev/null
+
+            echo "Patched $LOADER (Arch $I). Resigning..."
+            codesign -f -s - "$LOADER" &>/dev/null
+        else
+            echo "No target architecture (caps 0x81) found in '$LOADER'."
+        fi
+    - onlyif:
+      - |
+          LOADER="/Library/ScriptingAdditions/yabai.osax/Contents/MacOS/loader"
+          # Get index (I) and offset (O) for caps 0x81
+          read I O <<< $(otool -f "$LOADER" | awk '/architecture/{i=$2} /capabilities 0x81/{f=1} f&&/offset/{print i, $2; exit}')
+          [ -n "$O" ] || exit 1
+{%-   endif %}
+
 {%-   if yabai.users | selectattr("yabai.pwless_sudo", "true") | list %}
 
 # This makes sure that the scripting addon can be loaded without
