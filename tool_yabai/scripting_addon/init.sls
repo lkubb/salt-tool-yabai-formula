@@ -31,7 +31,7 @@ Allowing non-Apple-signed arm64e binaries:
 # binary's hash, this state only runs on changes in the package
 # state. If brew has upgraded the binary otherwise, you will need
 # to ensure that the hash is correct manually.
-# see https://github.com/koekeishiya/yabai/issues/1318
+# see https://github.com/asmvik/yabai/issues/1318
 Passwordless sudo is setup:
   file.managed:
     - name: /private/etc/sudoers.d/yabai

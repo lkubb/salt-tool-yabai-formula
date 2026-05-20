@@ -67,7 +67,7 @@ tool_global:
           # a replacing binary's hash automatically. That also means if
           # brew upgraded yabai otherwise, you will need to ensure the
           # correct hash is embedded manually.
-          # See https://github.com/koekeishiya/yabai/issues/1318
+          # See https://github.com/asmvik/yabai/issues/1318
         pwless_sudo: true
           # $PATH set in the user's service file.
           # Defaults to the user's $PATH.
@@ -120,7 +120,7 @@ tool_yabai:
 ######################################################################
   lookup:
     pkg:
-      name: koekeishiya/formulae/yabai
+      name: asmvik/formulae/yabai
     rootgroup: root
     paths:
       confdir: '.config/yabai'

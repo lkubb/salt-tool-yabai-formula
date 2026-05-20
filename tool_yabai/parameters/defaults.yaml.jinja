@@ -6,7 +6,7 @@ values:
   lookup:
     pkg:
       manager: brew
-      name: koekeishiya/formulae/yabai
+      name: asmvik/formulae/yabai
     paths:
       confdir: '.config/yabai'
       conffile: 'yabairc'
@@ -14,7 +14,7 @@ values:
       xdg_conffile: 'yabairc'
     rootgroup: {{ salt['cmd.run']("stat -f '%Sg' /dev/console") }}
     service:
-      name: com.koekeishiya.yabai
+      name: com.asmvik.yabai
     bin: '{{ salt["cmd.run_stdout"]("brew --prefix") | path_join("bin", "yabai") }}'
     console_user: '{{ salt["cmd.run_stdout"]('id -n -u $(stat -f "%u" /dev/console)', python_shell=True) }}'
     m1: {{ "Apple" in grains.cpu_model }}

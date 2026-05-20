@@ -34,7 +34,7 @@ mac_cask: false
 mac_library: false
 needs_repo: false
 needs_xdg_help: false
-pkg: koekeishiya/formulae/yabai
+pkg: asmvik/formulae/yabai
 service_abbr: yabai
 service_name: Yabai
 settings:

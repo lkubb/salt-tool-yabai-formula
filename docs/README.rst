@@ -16,7 +16,7 @@ Notes
 -----
 SIP
 ~~~
-`Some of the functionality <https://github.com/koekeishiya/yabai/issues/13>`_ of Yabai needs System Integrity Protection (SIP) disabled. The process `is decribed <https://github.com/koekeishiya/yabai/wiki/Disabling-System-Integrity-Protection>`_ in the excellent wiki. Basic functionality works without disabling it. This formula will work either way.
+`Some of the functionality <https://github.com/asmvik/yabai/issues/13>`_ of Yabai needs System Integrity Protection (SIP) disabled. The process `is decribed <https://github.com/koekeishiya/yabai/wiki/Disabling-System-Integrity-Protection>`_ in the excellent wiki. Basic functionality works without disabling it. This formula will work either way.
 
 M1 Macs
 ~~~~~~~
@@ -24,7 +24,7 @@ To be able to load the scripting addon after having disabled SIP, it is mandator
 
 Passwordless sudo
 ~~~~~~~~~~~~~~~~~
-To load the scripting addon transparently, it is necessary to allow passwordless sudo for ``yabai --load-sa`` (MacOS >=11). This is provided by an entry in ``sudoers``. Since the ``yabai`` binary is installed by brew, it is owned by the local administrator user account and can be replaced without root privileges. To `prevent a local privilege escalation that can result from that <https://github.com/koekeishiya/yabai/issues/1318>`_, the entry in sudoers is bound to the ``yabai`` binary hash. It is updated automatically only when the formula updates yabai to prevent binding it to some random binary in yabai's stead. If brew does its thing and updates yabai randomly, you will need to update the entry manually. The following script can help you with that:
+To load the scripting addon transparently, it is necessary to allow passwordless sudo for ``yabai --load-sa`` (MacOS >=11). This is provided by an entry in ``sudoers``. Since the ``yabai`` binary is installed by brew, it is owned by the local administrator user account and can be replaced without root privileges. To `prevent a local privilege escalation that can result from that <https://github.com/asmvik/yabai/issues/1318>`_, the entry in sudoers is bound to the ``yabai`` binary hash. It is updated automatically only when the formula updates yabai to prevent binding it to some random binary in yabai's stead. If brew does its thing and updates yabai randomly, you will need to update the entry manually. The following script can help you with that:
 
 .. code-block:: bash
 
@@ -341,4 +341,4 @@ This means if you feel a state should be documented, make sure to write a commen
 
 Reference
 ---------
-* https://github.com/koekeishiya/yabai/wiki/ (excellent wiki)
+* https://github.com/asmvik/yabai/wiki/ (excellent wiki)

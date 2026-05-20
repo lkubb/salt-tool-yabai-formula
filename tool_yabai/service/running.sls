@@ -33,7 +33,7 @@ Yabai service is loaded during login for user '{{ user.name }}':
   file.managed:
     - name: {{ user.home | path_join("Library", "LaunchAgents", yabai.lookup.service.name ~ ".plist") }}
     - source: {{ files_switch(
-                    ["com.koekeishiya.yabai.plist", "com.koekeishiya.yabai.plist.j2"],
+                    ["com.asmvik.yabai.plist", "com.asmvik.yabai.plist.j2"],
                     lookup="Yabai service is loaded during login for user '{}'".format(user.name),
                     config=yabai,
                     custom_data={"users": [user.name]},
